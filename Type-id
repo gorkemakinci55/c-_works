@@ -1,0 +1,37 @@
+  /// Type naming ///
+  Types that do not have names often need to be referred to in C++ programs; the syntax for that is known as type-id.
+  
+  int *p // p named int pointer declaration
+  static_cast<int*>(p) // type-id is that int*
+  
+  int a[3] // a = identifier , 3-sized of int array
+  new int[3]; // type-id is "int[3]" (called new-type-id) probably new syntax uses type-id.
+  
+  int (*(*[2])())[3]  // declaration of an array of 2 pointers to functions
+                      // returning pointer to array of 3 int                   
+  new (int (*(*[2])())[3]); // type-id is "int (*(*[2])())[3]"        
+  
+  void f(int); // declaration of a function taking int and returning void
+  std::function<void(int)> x = f; // type template parameter is a type-id "void(int)" 
+  std::function<auto(int) -> void> y = f; // same
+  
+  std::vector<int> x; // declaration of a vector of int , what we should learn about here is that "std::vector<int>" is a type
+  sizeof(std::vector<int>); // type-id is std::vector<int>
+  
+struct { int x; } b;         // creates a new type and declares an object b of that type
+sizeof(struct{ int x; });    // error: cannot define new types in a sizeof expression
+using t = struct { int x; }; // creates a new type and declares t as an alias of that type
+ 
+sizeof(static int); // error: storage class specifiers not part of type-specifier-seq
+std::function<inline void(int)> f; // error: neither are function specifiers
+
+type-id may be used in following situations;
+ -to specify the target type in cast expressions;
+ -as arguments to sizeof,alignof,alignas,new and typeid
+ -on the right hand side of type alias declaration
+ -as the trailing return type of a function declaration;
+ -as the default argument of a template type parameter;
+ -as the template argument for a template type parameter;
+ -in dynamic exception specification.
+ 
+ 
