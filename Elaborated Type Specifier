@@ -1,0 +1,29 @@
+/////// Elaborated Type Specifier ////////
+
+Elaborated type specifiers may be used to refer to a previously-defined
+class name(class,struct,union) or previously-declared enum names
+
+1)Static Type
+The type of an expression results from the compile time analysis of the program is known as the static type of the expression. 
+The static type does not change while program is executing.
+
+2)Dynamic Type
+If some glvalue expression refers to a polymorphic object, the type of its most derived object is known as the dynamic type
+struct B { virtual ~B() {} }; // polymorphic type
+Struct D : B {}; // Polymorphic type
+D d; // most-derived object
+B* ptr = &d;
+// the static type of (*ptr) is B
+// the dynamic type of (*ptr) is D
+
+3)Incomplete Type
+
+The following types are incomplete types;
+ -the type void 
+ -incompletely-defined object types {
+    *class type that has een declared but not defined ( forward declaration)
+    *array of unknown bound
+    *array of elements of incomplete type
+    *enumeration type from the point of declaration until its underlying type is determined.
+All other types are complete.    
+
